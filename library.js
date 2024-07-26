@@ -1,5 +1,7 @@
 let myLibrary = [];
 
+/* Book template */
+
 function Book(id, title, author, pages, read) {
     this.id = id;
     this.title = title;
@@ -22,87 +24,95 @@ function Book(id, title, author, pages, read) {
     }
 }
 
-i=0;
+/* Add book */
+
+idCount=0;
 function addBookToLibrary(id, title, author, pages, read) {
-    id = i;
+    id = idCount+1;
     const newBook = new Book (id, title, author, pages, read);
     myLibrary.push(newBook);
-    i ++;
-    console.log(myLibrary);
+    idCount ++;
 }
 
-/*
-const test1 = new Book ("LOTR", "JRR Tolkien", 350, true);
-const test2 = new Book ("dfds", "machin B", 500, false);
-myLibrary.push(test1, test2);
-addBookToLibrary("blabla", "moi", 15, true);
-
-
-for (let i = 0; i < myLibrary.length; i++) {
-    const container = document.querySelector(".cards");
-    const newCard = document.createElement("div");
-    newCard.classList.add("card" + i);
-    const newText = document.createElement("div");
-    newText.classList.add("text");
-    newText.setAttribute('style', 'white-space: pre;');
-    newText.textContent = `Name : ${myLibrary[i].title} \r\nAuthor : ${myLibrary[i].author} \r\nPages : ${myLibrary[i].pages}`;
-    const deleteButton = document.createElement("button");
-    deleteButton.setAttribute("class" , "deleteButton");
-    deleteButton.setAttribute("id", i);
-    deleteButton.textContent = "Delete";
-
-
-    newCard.appendChild(newText);
-    container.appendChild(newCard);
-    newCard.appendChild(deleteButton);
-}
-
-*/
-
+/* Add card */
 
 const container = document.querySelector(".cards");
 
 function addCardToDom() {
     const newCard = document.createElement("div");
     newCard.classList.add("card");
-    newCard.setAttribute("id", "card" + `${myLibrary.length-1}`);
+    newCard.setAttribute("id", "card" + idCount);
     
     const newText = document.createElement("div");
     newText.classList.add("text");
     newText.setAttribute('style', 'white-space: pre;');
-    newText.textContent = `Name : ${myLibrary[myLibrary.length -1].title} \r\nAuthor : ${myLibrary[myLibrary.length -1].author} \r\nPages : ${myLibrary[myLibrary.length -1].pages}`;
+    let readBook = "";
+    if (myLibrary[myLibrary.length -1].read === true) {
+        readBook = "Yes";
+    }
+    else{
+        readBook = "No";
+    }
+    newText.textContent =  
+    `Name : ${myLibrary[myLibrary.length -1].title} 
+    \r\nAuthor : ${myLibrary[myLibrary.length -1].author} 
+    \r\nPages : ${myLibrary[myLibrary.length -1].pages}
+    \r\nRead it ? : ${readBook}`;
     
     const deleteButton = document.createElement("button");
     deleteButton.setAttribute("class" , "deleteButton");
-    deleteButton.setAttribute("id", `${myLibrary.length-1}`);
+    deleteButton.setAttribute("id", idCount);
     deleteButton.textContent = "Delete";
     deleteButton.setAttribute("onclick", "deleteCard(this.id)");
     
     const readButton = document.createElement("button");
     readButton.setAttribute("class" , "readButton");
-    readButton.setAttribute("id", `${myLibrary.length-1}`);
+    readButton.setAttribute("id", idCount);
     readButton.textContent = "Read ?";
     readButton.setAttribute("onclick", "changeReadStatus(this.id)");
 
     newCard.appendChild(newText);
     newCard.appendChild(deleteButton);
+    newCard.appendChild(readButton);
     container.appendChild(newCard);
 
 }
+
+/* Delete card */ 
 
 function deleteCard(id) {
     const idToBeDeleted = "#card" + id;
     const toBeDeleted = document.querySelector(idToBeDeleted);
     const deleteFromLibrary = myLibrary.find(x => x.id === parseInt(id));
-    console.log(test);
+    myLibrary.splice(myLibrary.indexOf(deleteFromLibrary), 1);
     container.removeChild(toBeDeleted);
 }
 
-/* TO DO : accéder à myLibrary et delete le bouquin en même temps. Puis faire la fonction "changer lu/paslu" */
+/* Change read status */
 
+function changeReadStatus(id) {
+    const idToBeChanged = "#card" + id + " .text";
+    const toBeChanged = document.querySelector(idToBeChanged);
+    const changeInLibrary = myLibrary.find(x => x.id === parseInt(id));
+    let changeReadCard = "";
 
+    if (changeInLibrary.read === true) {
+        changeInLibrary.read = false;
+        changeReadCard = "No";
+    }
+    else if (changeInLibrary.read === false) {
+        changeInLibrary.read = true;
+        changeReadCard = "Yes";
+    }
 
+    toBeChanged.textContent = 
+    `Name : ${changeInLibrary.title} 
+    \r\nAuthor : ${changeInLibrary.author} 
+    \r\nPages : ${changeInLibrary.pages}
+    \r\nRead it ? : ${changeReadCard}`;
+}
 
+/* Form */
 
 const showButton = document.getElementById("showForm");
 const formNewBook = document.getElementById("formNewBook");
@@ -119,15 +129,21 @@ form.addEventListener("submit", (event) => {
     let titleForm = document.getElementById("title").value;
     let authorForm = document.getElementById("author").value;
     let pagesForm = document.getElementById("pages").value;
-    let readForm = document.getElementsByName("read").value;
-    if (readForm === "yes") {
-        readForm = true;
+    let readForm = document.getElementsByName("read");
+    let readIt = "";
+    for(i=0; i<2 ; i++) {
+        if (readForm[i].checked) {
+            readIt = readForm[i].value;
+        }
+    }
+    if (readIt === "yes") {
+        readIt = true;
     }
     else {
-        readForm = false;
+        readIt = false;
     }
 
-    addBookToLibrary(0, titleForm, authorForm, pagesForm, readForm);
+    addBookToLibrary(0, titleForm, authorForm, pagesForm, readIt);
     addCardToDom();
 
     formNewBook.close();
