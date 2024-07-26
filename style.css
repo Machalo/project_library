@@ -1,11 +1,94 @@
-.cards {
+@import "./modern-normalize-main/modern-normalize.css";
+
+:root {
+  line-height: 1.5;
+}
+
+h1, h2, h3, h4, h5, figure, p, ol, ul {
+  margin: 0;
+}
+
+ol[role="list"], ul[role="list"] {
+  list-style: none;
+  padding-inline: 0;
+}
+
+h1, h2, h3, h4, h5 {
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+img {
+  display: block;
+  max-inline-size: 100%;
+}
+
+@font-face {
+    font-family: "odinFont";
+    src: url(./thor-font/Thor-GlyO.ttf);
+}
+
+@font-face {
+    font-family: "coreFont";
+    src: url(./roboto-slab-font/RobotoSlabRegular-w1GE3.ttf);
+}
+
+html {
+    height: 100%;
+}
+
+body {
     display: grid;
-    grid-template-columns: repeat(auto-fit, 200px);
+    grid-template-columns: 1fr;
+    grid-template-rows: 120px;
+    text-align: center;
+    height: 100%;
+}
+
+.header {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #94a3b8;
+    font-family: "odinFont";
+}
+
+button {
+    border-radius: 5px;
+    height: 30px;
+    width: 180px;
+    font-size: 20px;
+}
+
+.title {
+    font-size: 35px;
+}
+
+.cards {
+    font-family: "coreFont";
+    font-size: 17px ;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 350px);
     gap: 20px;
+    padding: 40px;
+    background-color: #cbd5e1;
+    justify-content: space-evenly;
 }
 
 .card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
     padding: 10px;
-    background-color: lightgrey;
+    background-color: #94a3b8;
     border-radius: 10px;
+    align-self: start;
+}
+
+ul {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    text-align: left;
 }

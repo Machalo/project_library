@@ -55,9 +55,9 @@ function addCardToDom() {
     }
     newText.textContent =  
     `Name : ${myLibrary[myLibrary.length -1].title} 
-    \r\nAuthor : ${myLibrary[myLibrary.length -1].author} 
-    \r\nPages : ${myLibrary[myLibrary.length -1].pages}
-    \r\nRead it ? : ${readBook}`;
+    Author : ${myLibrary[myLibrary.length -1].author} 
+    Pages : ${myLibrary[myLibrary.length -1].pages}
+    Read it ? : ${readBook}`;
     
     const deleteButton = document.createElement("button");
     deleteButton.setAttribute("class" , "deleteButton");
@@ -107,9 +107,9 @@ function changeReadStatus(id) {
 
     toBeChanged.textContent = 
     `Name : ${changeInLibrary.title} 
-    \r\nAuthor : ${changeInLibrary.author} 
-    \r\nPages : ${changeInLibrary.pages}
-    \r\nRead it ? : ${changeReadCard}`;
+    Author : ${changeInLibrary.author} 
+    Pages : ${changeInLibrary.pages}
+    Read it ? : ${changeReadCard}`;
 }
 
 /* Form */
@@ -150,4 +150,7 @@ form.addEventListener("submit", (event) => {
     form.reset();
 })
 
-
+addBookToLibrary(0, "Title example", "Author example", 378, true);
+addCardToDom();
+addBookToLibrary(0, "The lord of the ring", "J.R.R Tolkien", 658, false);
+addCardToDom();

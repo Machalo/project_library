@@ -7,6 +7,12 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+    <div class="header">
+        <div class="title">The Odin Library</div>
+        <button id="showForm">Add a new book</button>
+    </div>
+    
     
     <div class="cards"></div>
 
@@ -14,15 +20,15 @@
         <form>
             <ul>
                 <li>
-                    <label for="title">Title :<span aria-label="required">*</span></label>
-                    <input type="text" name="title" id="title" required>
+                    <label for="title">Title :&emsp;<span aria-label="required">*</span></label>
+                    <input type="text" name="title" id="title" required maxlength="20">
                 </li>
                 <li>
-                    <label for="author">Author :<span aria-label="required">*</span></label>
-                    <input type="text" name="author" id="author" required>
+                    <label for="author">Author :&emsp;<span aria-label="required">*</span></label>
+                    <input type="text" name="author" id="author" required maxlength="20">
                 </li>
                 <li>
-                    <label for="pages">Pages :<span aria-label="required">*</span></label>
+                    <label for="pages">Pages :&emsp;<span aria-label="required">*</span></label>
                     <input type="number" name="pages" id="pages" value="1" min="1" max="10000" required>
                 </li>
                 <li>
@@ -40,7 +46,7 @@
         </form>
     </dialog>
 
-    <button id="showForm">Add a new book !</button>
+    
     
 
     <script src="library.js"></script>
