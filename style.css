@@ -58,6 +58,7 @@ button {
     height: 30px;
     width: 180px;
     font-size: 20px;
+    background-color: #cbd5e1;
 }
 
 .title {
@@ -91,4 +92,14 @@ ul {
     flex-direction: column;
     justify-content: flex-start;
     text-align: left;
+    gap: 10px;
+}
+
+input {
+  background-color: #cbd5e1;
+}
+
+#formNewBook {
+  background-color: #94a3b8;
+  
 }
